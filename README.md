@@ -1,13 +1,13 @@
 # KeyboardHelper
-Adds support for sequence of gestures and keyboard events to WPF controls that are not TextBox
+Adds support for sequence of gestures and keyboard events to WPF controls that are not `TextBox`.
 
 ## MultiKeyGesture
 
-The `MultiKeyGesture` class is a replacement for KeyGesture when a sequence of key is needed, rather than just one key pressed. For example, the sequence `Ctrl+B, T` is used in Visual Studio to toggle a bookmark. There not support for this feature in the KeyGesture class of .NET, but you can do it with `MultiKeyGesture`.
+The `MultiKeyGesture` class is a replacement for `KeyGesture` when a sequence of keys is needed, rather than just one key pressed. For example, the sequence `Ctrl+B, T` is used in Visual Studio to toggle a bookmark. There is no support for this feature in the .NET `KeyGesture` class, but you can do it with `MultiKeyGesture`.
 
 To use this class, proceed as follow:
 + Add the KeyboardHelper assembly to your project.
-+ Add the following line in the header of your Xaml file:
++ Add the following line in the header of your Xaml file:  
 `xmlns:kh="clr-namespace:KeyboardHelper.Xaml;assembly=KeyboardHelper"`
 + In the rest of the xaml file, whenever you would write `Gesture="..."`, write `Gesture="{kh:MultiKeyGesture ...}"` instead.
 
@@ -15,7 +15,7 @@ Note that `kh:` is a prefix I chose for this example. You can change it if you w
 
 Complete example:
 
-``` cs
+```xml
 <UserControl x:Class="Test.MyControl"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
