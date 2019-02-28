@@ -34,11 +34,12 @@
         /// Notify handlers of a character key event.
         /// </summary>
         /// <param name="code">The character code.</param>
+        /// <param name="key">The key that generated the character, <see cref="Key.None"/> if not available.</param>
         /// <param name="sourceEvent">The routed event identifier for this instance of the <see cref="CharacterKeyEventArgs"/> class.</param>
         /// <returns>True if the event was handled; otherwise, false.</returns>
-        protected bool NotifyCharacterKey(int code, RoutedEvent sourceEvent)
+        protected bool NotifyCharacterKey(int code, Key key, RoutedEvent sourceEvent)
         {
-            CharacterKeyEventArgs Args = new CharacterKeyEventArgs(code, sourceEvent);
+            CharacterKeyEventArgs Args = new CharacterKeyEventArgs(code, key, sourceEvent);
             CharacterKey?.Invoke(this, Args);
 
             return Args.Handled;
@@ -112,13 +113,17 @@
                 case Key.Home:
                 case Key.End:
                     IsHandled = HandleMoveKey(PressedKey, SourceEvent);
+                    IsPreviousKeyEmpty = false;
                     break;
 
                 default:
                     if (!PressedKey.Flags.HasFlag(KeyFlags.Ctrl) && !string.IsNullOrEmpty(PressedKey.KeyText))
                     {
                         int Code = StringHelper.StringToCode(PressedKey.KeyText);
-                        IsHandled = NotifyCharacterKey(Code, SourceEvent);
+                        Key Key = IsPreviousKeyEmpty ? Key.None : PressedKey.Key;
+                        IsHandled = NotifyCharacterKey(Code, Key, SourceEvent);
+
+                        IsPreviousKeyEmpty = false;
                     }
                     break;
             }
@@ -175,7 +180,7 @@
                         if (StringHelper.IsVisible(Code))
                         {
                             DebugPrint($"Final numpad string parsed as {Code}");
-                            NotifyCharacterKey(Code, e.RoutedEvent);
+                            NotifyCharacterKey(Code, Key.None, e.RoutedEvent);
                         }
                         else
                             DebugPrint($"Final numpad string parsed as {Code} but this character is not visible.");
@@ -291,7 +296,10 @@
             if (KeyboardInterop.TryParseKey(e, out Text))
                 KeyText = Text;
             else
+            {
+                IsPreviousKeyEmpty = true;
                 KeyText = string.Empty;
+            }
 
             KeyMap PressedKey = new KeyMap(Key, Flags, KeyText);
 
@@ -299,6 +307,7 @@
         }
 
         private string NumPadText;
+        private bool IsPreviousKeyEmpty;
         #endregion
 
         #region Debugging
