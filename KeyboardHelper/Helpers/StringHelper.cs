@@ -71,9 +71,9 @@
         /// Replaces a character in a string at a provided position.
         /// </summary>
         /// <param name="code">The character code.</param>
-        /// <param name="position">The position in <paramref name="text"/> where to replace.</param>
         /// <param name="text">The string.</param>
-        public static void ReplaceCharacter(int code, ref int position, ref string text)
+        /// <param name="position">The position in <paramref name="text"/> where to replace.</param>
+        public static void ReplaceCharacter(int code, ref string text, ref int position)
         {
             if (code <= 0) throw new ArgumentException($"{nameof(code)} must be strictly greater than zero.");
             if (text == null) throw new ArgumentNullException(nameof(text));
@@ -97,9 +97,9 @@
         /// Inserts a character in a string at a provided position, updating the position to point after the inserted character.
         /// </summary>
         /// <param name="code">The character code.</param>
-        /// <param name="position">The position in <paramref name="text"/> where to insert.</param>
         /// <param name="text">The string.</param>
-        public static void InsertCharacter(int code, ref int position, ref string text)
+        /// <param name="position">The position in <paramref name="text"/> where to insert.</param>
+        public static void InsertCharacter(int code, ref string text, ref int position)
         {
             if (code <= 0) throw new ArgumentException($"{nameof(code)} must be strictly greater than zero.");
             if (text == null) throw new ArgumentNullException(nameof(text));
@@ -124,10 +124,10 @@
         /// This method will do nothing if there is no character to delete.
         /// </summary>
         /// <param name="backward">True to delete on the left of <paramref name="position"/>; false to delete at <paramref name="position"/>.</param>
-        /// <param name="position">The position in <paramref name="text"/> where to delete.</param>
         /// <param name="text">The string.</param>
+        /// <param name="position">The position in <paramref name="text"/> where to delete.</param>
         /// <returns>True if <paramref name="text"/> was changed; otherwise, false.</returns>
-        public static bool DeleteCharacter(bool backward, ref int position, ref string text)
+        public static bool DeleteCharacter(bool backward, ref string text, ref int position)
         {
             if (text == null) throw new ArgumentNullException(nameof(text));
             if (position < 0 || position > text.Length) throw new ArgumentException($"{nameof(position)} must be a valid position in {nameof(text)}.");

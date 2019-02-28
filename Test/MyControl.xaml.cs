@@ -48,9 +48,9 @@
             if (StringHelper.IsVisible(e.Code))
             {
                 if (CaretType == InsertionCaret)
-                    StringHelper.InsertCharacter(e.Code, ref CurrentCaretPosition, ref CurrentText);
+                    StringHelper.InsertCharacter(e.Code, ref CurrentText, ref CurrentCaretPosition);
                 else
-                    StringHelper.ReplaceCharacter(e.Code, ref CurrentCaretPosition, ref CurrentText);
+                    StringHelper.ReplaceCharacter(e.Code, ref CurrentText, ref CurrentCaretPosition);
 
                 Text = CurrentText;
                 NotifyPropertyChanged(nameof(Text));
@@ -103,7 +103,7 @@
                 string CurrentText = Text;
                 int CurrentCaretPosition = CaretPosition;
 
-                if (StringHelper.DeleteCharacter(false, ref CurrentCaretPosition, ref CurrentText))
+                if (StringHelper.DeleteCharacter(false, ref CurrentText, ref CurrentCaretPosition))
                 {
                     Text = CurrentText;
                     NotifyPropertyChanged(nameof(Text));
@@ -140,7 +140,7 @@
                 string CurrentText = Text;
                 int CurrentCaretPosition = CaretPosition;
 
-                if (StringHelper.DeleteCharacter(true, ref CurrentCaretPosition, ref CurrentText))
+                if (StringHelper.DeleteCharacter(true, ref CurrentText, ref CurrentCaretPosition))
                 {
                     Text = CurrentText;
                     NotifyPropertyChanged(nameof(Text));
