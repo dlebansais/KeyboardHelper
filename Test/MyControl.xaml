@@ -18,7 +18,7 @@
         <DockPanel DockPanel.Dock="Top" LastChildFill="False">
             <DockPanel DockPanel.Dock="Left">
                 <TextBlock>Caret type:</TextBlock>
-                <TextBlock Text="{Binding CaretType}" Margin="5,0,0,0"/>
+                <TextBlock Text="{Binding ActualCaretType}" Margin="5,0,0,0"/>
             </DockPanel>
             <DockPanel DockPanel.Dock="Left" Margin="20,0,0,0">
                 <TextBlock>Caret position:</TextBlock>

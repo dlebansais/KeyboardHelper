@@ -34,6 +34,7 @@
         public string CaretType { get; private set; }
         public int CaretPosition { get; private set; }
 
+        public string ActualCaretType { get { return CaretPosition < Text.Length ? CaretType : InsertionCaret; } }
         public string DeleteSequence { get { return GetSequenceText(EditingCommands.Delete); } }
         public string ToggleInsertSequence { get { return GetSequenceText(EditingCommands.ToggleInsert); } }
         public string BackspaceSequence { get { return GetSequenceText(EditingCommands.Backspace); } }
@@ -47,7 +48,7 @@
 
             if (StringHelper.IsVisible(e.Code))
             {
-                if (CaretType == InsertionCaret)
+                if (ActualCaretType == InsertionCaret)
                     StringHelper.InsertCharacter(e.Code, ref CurrentText, ref CurrentCaretPosition);
                 else
                     StringHelper.ReplaceCharacter(e.Code, ref CurrentText, ref CurrentCaretPosition);
@@ -56,8 +57,7 @@
                 NotifyPropertyChanged(nameof(Text));
                 CaretPosition = CurrentCaretPosition;
                 NotifyPropertyChanged(nameof(CaretPosition));
-
-                UpdateCaret();
+                NotifyPropertyChanged(nameof(ActualCaretType));
             }
         }
 
@@ -66,32 +66,19 @@
             Debug.WriteLine($"OnMoveKey: {e.Direction}, Ctrl:{e.Flags.HasFlag(KeyFlags.Ctrl)}, Shift:{e.Flags.HasFlag(KeyFlags.Shift)}");
 
             if (e.Direction == MoveDirections.Left && CaretPosition > 0)
-            {
                 CaretPosition--;
-                NotifyPropertyChanged(nameof(CaretPosition));
-            }
 
             else if (e.Direction == MoveDirections.Right && CaretPosition < Text.Length)
-            {
                 CaretPosition++;
-                NotifyPropertyChanged(nameof(CaretPosition));
-
-                UpdateCaret();
-            }
 
             else if (e.Direction == MoveDirections.Home && CaretPosition > 0)
-            {
                 CaretPosition = 0;
-                NotifyPropertyChanged(nameof(CaretPosition));
-            }
 
             else if (e.Direction == MoveDirections.End && CaretPosition < Text.Length)
-            {
                 CaretPosition = Text.Length;
-                NotifyPropertyChanged(nameof(CaretPosition));
 
-                UpdateCaret();
-            }
+            NotifyPropertyChanged(nameof(CaretPosition));
+            NotifyPropertyChanged(nameof(ActualCaretType));
         }
 
         private void OnDelete(object sender, ExecutedRoutedEventArgs e)
@@ -109,8 +96,7 @@
                     NotifyPropertyChanged(nameof(Text));
                     CaretPosition = CurrentCaretPosition;
                     NotifyPropertyChanged(nameof(CaretPosition));
-
-                    UpdateCaret();
+                    NotifyPropertyChanged(nameof(ActualCaretType));
                 }
             }
         }
@@ -119,16 +105,12 @@
         {
             Debug.WriteLine("OnToggleInsert");
 
-            if (CaretType == InsertionCaret && CaretPosition < Text.Length)
-            {
+            if (CaretType == InsertionCaret)
                 CaretType = OverwriteCaret;
-                NotifyPropertyChanged(nameof(CaretType));
-            }
-            else if (CaretType == OverwriteCaret)
-            {
+            else
                 CaretType = InsertionCaret;
-                NotifyPropertyChanged(nameof(CaretType));
-            }
+
+            NotifyPropertyChanged(nameof(ActualCaretType));
         }
 
         private void OnBackspace(object sender, ExecutedRoutedEventArgs e)
@@ -147,15 +129,6 @@
                     CaretPosition = CurrentCaretPosition;
                     NotifyPropertyChanged(nameof(CaretPosition));
                 }
-            }
-        }
-
-        private void UpdateCaret()
-        {
-            if (CaretPosition == Text.Length && CaretType != InsertionCaret)
-            {
-                CaretType = InsertionCaret;
-                NotifyPropertyChanged(nameof(CaretType));
             }
         }
 
