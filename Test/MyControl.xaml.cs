@@ -1,7 +1,6 @@
 ﻿namespace Test
 {
     using System.ComponentModel;
-    using System.Diagnostics;
     using System.Runtime.CompilerServices;
     using System.Windows.Controls;
     using System.Windows.Documents;
@@ -27,6 +26,8 @@
 
             Text = "test";
             CaretType = InsertionCaret;
+
+            KeyboardManager.ShowTraces = true;
         }
 
         private KeyboardManager KeyboardManager;
@@ -41,7 +42,7 @@
 
         private void OnCharacterKey(object sender, CharacterKeyEventArgs e)
         {
-            Debug.WriteLine($"OnCharacterKey: '{StringHelper.CodeToString(e.Code)}'");
+            KeyboardManager.DebugPrint($"OnCharacterKey: '{StringHelper.CodeToString(e.Code)}'");
 
             string CurrentText = Text;
             int CurrentCaretPosition = CaretPosition;
@@ -63,7 +64,7 @@
 
         private void OnMoveKey(object sender, MoveKeyEventArgs e)
         {
-            Debug.WriteLine($"OnMoveKey: {e.Direction}, Ctrl:{e.Flags.HasFlag(KeyFlags.Ctrl)}, Shift:{e.Flags.HasFlag(KeyFlags.Shift)}");
+            KeyboardManager.DebugPrint($"OnMoveKey: {e.Direction}, Ctrl:{e.Flags.HasFlag(KeyFlags.Ctrl)}, Shift:{e.Flags.HasFlag(KeyFlags.Shift)}, Alt:{e.Flags.HasFlag(KeyFlags.Alt)}");
 
             if (e.Direction == MoveDirections.Left && CaretPosition > 0)
                 CaretPosition--;
@@ -83,7 +84,7 @@
 
         private void OnDelete(object sender, ExecutedRoutedEventArgs e)
         {
-            Debug.WriteLine("OnDelete");
+            KeyboardManager.DebugPrint("OnDelete");
 
             if (CaretPosition < Text.Length)
             {
@@ -103,7 +104,7 @@
 
         private void OnToggleInsert(object sender, ExecutedRoutedEventArgs e)
         {
-            Debug.WriteLine("OnToggleInsert");
+            KeyboardManager.DebugPrint("OnToggleInsert");
 
             if (CaretType == InsertionCaret)
                 CaretType = OverwriteCaret;
@@ -115,7 +116,7 @@
 
         private void OnBackspace(object sender, ExecutedRoutedEventArgs e)
         {
-            Debug.WriteLine("OnBackspace");
+            KeyboardManager.DebugPrint("OnBackspace");
 
             if (CaretPosition > 0)
             {

@@ -11,7 +11,7 @@
         /// Initializes a new instance of the <see cref="MoveKeyEventArgs"/> class.
         /// </summary>
         /// <param name="direction">The move direction.</param>
-        /// <param name="flags">Shift and Ctrl key flags.</param>
+        /// <param name="flags">Alt, Shift and Ctrl key flags.</param>
         public MoveKeyEventArgs(MoveDirections direction, KeyFlags flags)
             : base()
         {
@@ -23,7 +23,7 @@
         /// Initializes a new instance of the <see cref="MoveKeyEventArgs"/> class.
         /// </summary>
         /// <param name="direction">The move direction.</param>
-        /// <param name="flags">Shift and Ctrl key flags.</param>
+        /// <param name="flags">Alt, Shift and Ctrl key flags.</param>
         /// <param name="routedEvent">The routed event identifier for this instance of the <see cref="MoveKeyEventArgs"/> class.</param>
         public MoveKeyEventArgs(MoveDirections direction, KeyFlags flags, RoutedEvent routedEvent)
             : base(routedEvent)
@@ -36,7 +36,7 @@
         /// Initializes a new instance of the <see cref="MoveKeyEventArgs"/> class.
         /// </summary>
         /// <param name="direction">The move direction.</param>
-        /// <param name="flags">Shift and Ctrl key flags.</param>
+        /// <param name="flags">Alt, Shift and Ctrl key flags.</param>
         /// <param name="routedEvent">The routed event identifier for this instance of the <see cref="MoveKeyEventArgs"/> class.</param>
         /// <param name="source">An alternate source that will be reported when the event is handled.</param>
         public MoveKeyEventArgs(MoveDirections direction, KeyFlags flags, RoutedEvent routedEvent, object source)
@@ -52,9 +52,14 @@
         public MoveDirections Direction { get; }
 
         /// <summary>
-        /// Shift and Ctrl key flags.
+        /// Alt, Shift and Ctrl key flags.
         /// </summary>
         public KeyFlags Flags { get; }
+
+        /// <summary>
+        /// True if the alt key is pressed.
+        /// </summary>
+        public bool IsAlt { get { return Flags.HasFlag(KeyFlags.Alt); } }
 
         /// <summary>
         /// True if the shift key is pressed.

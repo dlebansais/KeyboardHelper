@@ -117,7 +117,7 @@
                     break;
 
                 default:
-                    if (!PressedKey.Flags.HasFlag(KeyFlags.Ctrl) && !string.IsNullOrEmpty(PressedKey.KeyText))
+                    if (!PressedKey.Flags.HasFlag(KeyFlags.Ctrl) && !PressedKey.Flags.HasFlag(KeyFlags.Alt) && !string.IsNullOrEmpty(PressedKey.KeyText))
                     {
                         int Code = StringHelper.StringToCode(PressedKey.KeyText);
                         Key Key = IsPreviousKeyEmpty ? Key.None : PressedKey.Key;
@@ -263,8 +263,9 @@
             if (Key == Key.System)
                 Key = e.SystemKey;
 
-            bool IsCtrlDown = (Keyboard.IsKeyDown(Key.LeftCtrl) || Keyboard.IsKeyDown(Key.RightCtrl)) && !(Keyboard.IsKeyDown(Key.LeftAlt) || Keyboard.IsKeyDown(Key.RightAlt));
+            bool IsCtrlDown = Keyboard.IsKeyDown(Key.LeftCtrl) || Keyboard.IsKeyDown(Key.RightCtrl);
             bool IsShiftDown = Keyboard.IsKeyDown(Key.LeftShift) || Keyboard.IsKeyDown(Key.RightShift);
+            bool IsAltDown = Keyboard.IsKeyDown(Key.LeftAlt) || Keyboard.IsKeyDown(Key.RightAlt);
 
             if (Key == Key.LeftAlt)
             {
@@ -281,15 +282,12 @@
             }
 
             KeyFlags Flags = KeyFlags.None;
-
-            if (IsCtrlDown && IsShiftDown)
-                Flags = KeyFlags.Ctrl | KeyFlags.Shift;
-
-            else if (!IsCtrlDown && IsShiftDown)
-                Flags = KeyFlags.Shift;
-
-            else if (IsCtrlDown && !IsShiftDown)
-                Flags = KeyFlags.Ctrl;
+            if (IsCtrlDown)
+                Flags |= KeyFlags.Ctrl;
+            if (IsShiftDown)
+                Flags |= KeyFlags.Shift;
+            if (IsAltDown)
+                Flags |= KeyFlags.Alt;
 
             string KeyText;
             string Text;
@@ -314,10 +312,15 @@
         /// <summary>
         /// Show debug traces.
         /// </summary>
-        public static bool ShowTraces { get; private set; } = false;
+        public static bool ShowTraces { get; set; } = false;
         private bool LastKeyRepeated = false;
 
-        private void DebugPrint(string s, KeyEventArgs e)
+        /// <summary>
+        /// Prints <paramref name="s"/> and the key state in <paramref name="e"/>.
+        /// </summary>
+        /// <param name="s">The debug string to display.</param>
+        /// <param name="e">The key state.</param>
+        public void DebugPrint(string s, KeyEventArgs e)
         {
             if (e.IsRepeat)
             {
@@ -334,7 +337,11 @@
             }
         }
 
-        private void DebugPrint(string s)
+        /// <summary>
+        /// Prints a debug string.
+        /// </summary>
+        /// <param name="s">The debug string to display.</param>
+        public void DebugPrint(string s)
         {
             if (ShowTraces)
                 Debug.WriteLine(s);

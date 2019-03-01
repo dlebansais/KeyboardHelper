@@ -71,7 +71,7 @@
 
         public override string ToString()
         {
-            return (Flags.HasFlag(KeyFlags.Ctrl) ? "Ctrl-" : string.Empty) + (Flags.HasFlag(KeyFlags.Shift) ? "Shift-" : string.Empty) + Key.ToString() + (SecondaryKey != Key.None ? ", " + SecondaryKey.ToString() : string.Empty);
+            return (Flags.HasFlag(KeyFlags.Ctrl) ? "Ctrl-" : string.Empty) + (Flags.HasFlag(KeyFlags.Shift) ? "Shift-" : string.Empty) + (Flags.HasFlag(KeyFlags.Alt) ? "Alt-" : string.Empty) + Key.ToString() + (SecondaryKey != Key.None ? ", " + SecondaryKey.ToString() : string.Empty);
         }
     }
 }

@@ -10,6 +10,7 @@
         None = 0,
         Ctrl = 0x0001,
         Shift = 0x0002,
+        Alt = 0x0004,
     }
 #pragma warning restore SA1602 // Enumeration items must be documented
 #pragma warning restore CS1591 // Missing XML comment for publicly visible type or member
