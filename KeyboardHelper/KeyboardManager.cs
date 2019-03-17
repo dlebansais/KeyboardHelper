@@ -86,9 +86,9 @@
         {
             DebugPrint("OnKeyDown", e);
 
+            bool IsHandled = true;
             RoutedEvent SourceEvent = e.RoutedEvent;
             KeyMap PressedKey = GetCurrentKey(e);
-            bool IsHandled = true;
 
             switch (PressedKey.Key)
             {
@@ -117,6 +117,8 @@
                     break;
 
                 default:
+                    if (e.Key != Key.RightAlt && e.Key != Key.LeftAlt && e.Key != Key.LeftCtrl)
+                        IsHandled = true;
                     if (!PressedKey.Flags.HasFlag(KeyFlags.Ctrl) && !PressedKey.Flags.HasFlag(KeyFlags.Alt) && !string.IsNullOrEmpty(PressedKey.KeyText))
                     {
                         int Code = StringHelper.StringToCode(PressedKey.KeyText);
@@ -263,9 +265,9 @@
             if (Key == Key.System)
                 Key = e.SystemKey;
 
-            bool IsCtrlDown = Keyboard.IsKeyDown(Key.LeftCtrl) || Keyboard.IsKeyDown(Key.RightCtrl);
+            bool IsCtrlDown = (Keyboard.IsKeyDown(Key.LeftCtrl) && !Keyboard.IsKeyDown(Key.RightAlt)) || Keyboard.IsKeyDown(Key.RightCtrl);
             bool IsShiftDown = Keyboard.IsKeyDown(Key.LeftShift) || Keyboard.IsKeyDown(Key.RightShift);
-            bool IsAltDown = Keyboard.IsKeyDown(Key.LeftAlt) || Keyboard.IsKeyDown(Key.RightAlt);
+            bool IsAltDown = Keyboard.IsKeyDown(Key.LeftAlt) || (Keyboard.IsKeyDown(Key.RightAlt) && !Keyboard.IsKeyDown(Key.LeftCtrl));
 
             if (Key == Key.LeftAlt)
             {
