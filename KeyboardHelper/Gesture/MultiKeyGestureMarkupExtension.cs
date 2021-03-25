@@ -4,6 +4,7 @@
     using System.Collections.Generic;
     using System.Diagnostics;
     using System.Windows.Markup;
+    using Contracts;
 
     /// <summary>
     /// Markup extension to declare a <see cref="MultiKeyGesture"/> in Xaml.
@@ -36,9 +37,9 @@
         /// <param name="key1">The first key.</param>
         public MultiKeyGesture(string key1)
         {
-            Debug.Assert(key1 != null);
+            Contract.RequireNotNull(key1, out string Key1);
 
-            Sequence = new List<string>() { key1 };
+            Sequence = new List<string>() { Key1 };
         }
 
         /// <summary>
@@ -48,10 +49,10 @@
         /// <param name="key2">The second key.</param>
         public MultiKeyGesture(string key1, string key2)
         {
-            Debug.Assert(key1 != null);
-            Debug.Assert(key2 != null);
+            Contract.RequireNotNull(key1, out string Key1);
+            Contract.RequireNotNull(key2, out string Key2);
 
-            Sequence = new List<string>() { key1, key2 };
+            Sequence = new List<string>() { Key1, Key2 };
         }
 
         /// <summary>
@@ -62,11 +63,11 @@
         /// <param name="key3">The third key.</param>
         public MultiKeyGesture(string key1, string key2, string key3)
         {
-            Debug.Assert(key1 != null);
-            Debug.Assert(key2 != null);
-            Debug.Assert(key3 != null);
+            Contract.RequireNotNull(key1, out string Key1);
+            Contract.RequireNotNull(key2, out string Key2);
+            Contract.RequireNotNull(key3, out string Key3);
 
-            Sequence = new List<string>() { key1, key2, key3 };
+            Sequence = new List<string>() { Key1, Key2, Key3 };
         }
 
         /// <summary>
@@ -78,12 +79,12 @@
         /// <param name="key4">The fourth key.</param>
         public MultiKeyGesture(string key1, string key2, string key3, string key4)
         {
-            Debug.Assert(key1 != null);
-            Debug.Assert(key2 != null);
-            Debug.Assert(key3 != null);
-            Debug.Assert(key4 != null);
+            Contract.RequireNotNull(key1, out string Key1);
+            Contract.RequireNotNull(key2, out string Key2);
+            Contract.RequireNotNull(key3, out string Key3);
+            Contract.RequireNotNull(key4, out string Key4);
 
-            Sequence = new List<string>() { key1, key2, key3, key4 };
+            Sequence = new List<string>() { Key1, Key2, Key3, Key4 };
         }
 
         /// <summary>
@@ -96,13 +97,13 @@
         /// <param name="key5">The fifth key.</param>
         public MultiKeyGesture(string key1, string key2, string key3, string key4, string key5)
         {
-            Debug.Assert(key1 != null);
-            Debug.Assert(key2 != null);
-            Debug.Assert(key3 != null);
-            Debug.Assert(key4 != null);
-            Debug.Assert(key5 != null);
+            Contract.RequireNotNull(key1, out string Key1);
+            Contract.RequireNotNull(key2, out string Key2);
+            Contract.RequireNotNull(key3, out string Key3);
+            Contract.RequireNotNull(key4, out string Key4);
+            Contract.RequireNotNull(key5, out string Key5);
 
-            Sequence = new List<string>() { key1, key2, key3, key4, key5 };
+            Sequence = new List<string>() { Key1, Key2, Key3, Key4, Key5 };
         }
 
         /// <summary>
@@ -112,7 +113,7 @@
         public override object ProvideValue(IServiceProvider serviceProvider)
         {
             Debug.Assert(serviceProvider != null);
-            Debug.Assert(Sequence != null);
+            Debug.Assert(Sequence.Count > 0);
 
             return new KeyboardHelper.MultiKeyGesture(Sequence);
         }
@@ -120,6 +121,6 @@
         /// <summary>
         /// Key sequence text.
         /// </summary>
-        public List<string> Sequence { get; set; }
+        public List<string> Sequence { get; set; } = new List<string>();
     }
 }

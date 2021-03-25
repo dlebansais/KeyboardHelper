@@ -38,14 +38,14 @@
             if (hkl == IntPtr.Zero)
             {
                 // Keyboard not valid.
-                text = null;
+                text = string.Empty;
                 return false;
             }
 
             System.Windows.Forms.Keys[] keyStates = new System.Windows.Forms.Keys[256];
             if (!GetKeyboardState(keyStates))
             {
-                text = null;
+                text = string.Empty;
                 return false;
             }
 
@@ -54,7 +54,7 @@
 
             if (rc <= 0)
             {
-                text = null;
+                text = string.Empty;
                 return false;
             }
 

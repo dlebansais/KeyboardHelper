@@ -79,7 +79,7 @@
             if (text == null) throw new ArgumentNullException(nameof(text));
             if (position < 0 || position >= text.Length) throw new ArgumentException($"{nameof(position)} must be a valid position in {nameof(text)}.");
 
-            UTF32Encoding UTF32 = Encoding.UTF32 as UTF32Encoding;
+            UTF32Encoding UTF32 = (UTF32Encoding)Encoding.UTF32;
             byte[] FirstBytes = UTF32.GetBytes(text.Substring(0, position));
             byte[] ReplacedBytes = BitConverter.GetBytes(code);
             byte[] LastBytes = UTF32.GetBytes(text.Substring(position + 1));
@@ -105,7 +105,7 @@
             if (text == null) throw new ArgumentNullException(nameof(text));
             if (position < 0 || position > text.Length) throw new ArgumentException($"{nameof(position)} must be a valid position in {nameof(text)}.");
 
-            UTF32Encoding UTF32 = Encoding.UTF32 as UTF32Encoding;
+            UTF32Encoding UTF32 = (UTF32Encoding)Encoding.UTF32;
             byte[] FirstBytes = UTF32.GetBytes(text.Substring(0, position));
             byte[] InsertedBytes = BitConverter.GetBytes(code);
             byte[] LastBytes = UTF32.GetBytes(text.Substring(position));

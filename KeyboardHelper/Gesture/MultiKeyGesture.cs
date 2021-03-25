@@ -37,7 +37,7 @@
                     throw new XamlParseException($"Null string encountered in {nameof(MultiKeyGesture)}.");
 
                 // Try to parse the text as a gesture.
-                KeyGesture Gesture;
+                KeyGesture? Gesture;
                 try
                 {
                     Gesture = (KeyGesture)KeyGestureConverter.ConvertFrom(text);

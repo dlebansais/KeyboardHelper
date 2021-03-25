@@ -28,7 +28,7 @@
         /// <summary>
         /// Occurs when a visible character is obtained from the keyboard.
         /// </summary>
-        public event CharacterKeyEventHandler CharacterKey;
+        public event CharacterKeyEventHandler? CharacterKey;
 
         /// <summary>
         /// Notify handlers of a character key event.
@@ -48,7 +48,7 @@
         /// <summary>
         /// Occurs when a key pressed indicates the caret should be moved.
         /// </summary>
-        public event MoveKeyEventHandler MoveKey;
+        public event MoveKeyEventHandler? MoveKey;
 
         /// <summary>
         /// Notify handlers of a move key event.
@@ -306,7 +306,7 @@
             return PressedKey;
         }
 
-        private string NumPadText;
+        private string? NumPadText;
         private bool IsPreviousKeyEmpty;
         #endregion
 
