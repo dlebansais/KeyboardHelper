@@ -1,11 +1,21 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 15
-VisualStudioVersion = 15.0.28010.2041
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.31025.194
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "KeyboardHelper", "KeyboardHelper\KeyboardHelper.csproj", "{863131A3-2164-42C0-801E-C1B0807AAAE7}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "KeyboardHelper", "KeyboardHelper\KeyboardHelper.csproj", "{863131A3-2164-42C0-801E-C1B0807AAAE7}"
+	ProjectSection(ProjectDependencies) = postProject
+		{683FE111-E872-43E0-AB15-D2191BBA86A1} = {683FE111-E872-43E0-AB15-D2191BBA86A1}
+	EndProjectSection
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Test", "Test\Test.csproj", "{69140F4C-6627-49DE-BA8F-559E6851F6BC}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{56B39EC8-F665-411A-A507-FB353C95B85E}"
+	ProjectSection(SolutionItems) = preProject
+		.editorconfig = .editorconfig
+	EndProjectSection
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PreBuild", "PreBuild\PreBuild.csproj", "{683FE111-E872-43E0-AB15-D2191BBA86A1}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -21,6 +31,10 @@ Global
 		{69140F4C-6627-49DE-BA8F-559E6851F6BC}.Debug|x64.Build.0 = Debug|x64
 		{69140F4C-6627-49DE-BA8F-559E6851F6BC}.Release|x64.ActiveCfg = Release|x64
 		{69140F4C-6627-49DE-BA8F-559E6851F6BC}.Release|x64.Build.0 = Release|x64
+		{683FE111-E872-43E0-AB15-D2191BBA86A1}.Debug|x64.ActiveCfg = Debug|x64
+		{683FE111-E872-43E0-AB15-D2191BBA86A1}.Debug|x64.Build.0 = Debug|x64
+		{683FE111-E872-43E0-AB15-D2191BBA86A1}.Release|x64.ActiveCfg = Release|x64
+		{683FE111-E872-43E0-AB15-D2191BBA86A1}.Release|x64.Build.0 = Release|x64
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
