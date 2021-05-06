@@ -1,4 +1,4 @@
-﻿namespace Test
+﻿namespace TestKeyboardHelper
 {
     using System.ComponentModel;
     using System.Runtime.CompilerServices;
@@ -139,11 +139,11 @@
                 if (Binding.Command == command && Binding.Gesture is MultiKeyGesture AsMultiKeyGesture)
                     return AsMultiKeyGesture.ToString();
 
-            return null;
+            return string.Empty;
         }
 
         #region Implementation of INotifyPropertyChanged
-        public event PropertyChangedEventHandler PropertyChanged;
+        public event PropertyChangedEventHandler? PropertyChanged;
 
         public void NotifyPropertyChanged(string PropertyName)
         {

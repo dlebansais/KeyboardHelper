@@ -8,7 +8,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "KeyboardHelper", "KeyboardH
 		{683FE111-E872-43E0-AB15-D2191BBA86A1} = {683FE111-E872-43E0-AB15-D2191BBA86A1}
 	EndProjectSection
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Test", "Test\Test.csproj", "{69140F4C-6627-49DE-BA8F-559E6851F6BC}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Test-KeyboardHelper", "Test\Test-KeyboardHelper\Test-KeyboardHelper.csproj", "{69140F4C-6627-49DE-BA8F-559E6851F6BC}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{56B39EC8-F665-411A-A507-FB353C95B85E}"
 	ProjectSection(SolutionItems) = preProject
