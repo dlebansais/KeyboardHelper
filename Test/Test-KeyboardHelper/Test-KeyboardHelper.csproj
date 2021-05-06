@@ -7,10 +7,15 @@
     <LangVersion>9.0</LangVersion>
     <Nullable>enable</Nullable>
     <Platforms>x64</Platforms>
+    <GenerateDocumentationFile>false</GenerateDocumentationFile>
     <DisableFastUpToDateCheck>true</DisableFastUpToDateCheck>
     <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
     <RootNamespace>TestKeyboardHelper</RootNamespace>
     <NeutralLanguage>en-US</NeutralLanguage>
+  </PropertyGroup>
+
+  <PropertyGroup>
+    <NoWarn>SA0001</NoWarn>
   </PropertyGroup>
 
   <ItemGroup>

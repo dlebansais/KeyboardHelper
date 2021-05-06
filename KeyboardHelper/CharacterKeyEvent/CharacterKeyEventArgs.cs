@@ -48,12 +48,12 @@
         }
 
         /// <summary>
-        /// The character code.
+        /// Gets the character code.
         /// </summary>
         public int Code { get; }
 
         /// <summary>
-        /// The key that generated the character, <see cref="Key.None"/> if not available.
+        /// Gets the key that generated the character, <see cref="Key.None"/> if not available.
         /// </summary>
         public Key Key { get; }
     }

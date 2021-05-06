@@ -127,6 +127,7 @@
 
                         IsPreviousKeyEmpty = false;
                     }
+
                     break;
             }
 
@@ -167,7 +168,6 @@
                     DebugPrint("Recording numpad interrupted. Not a numpad key.");
                 }
             }
-
             else if ((e.Key == Key.LeftAlt || e.Key == Key.RightAlt) && !e.KeyStates.HasFlag(KeyStates.Down))
             {
                 DebugPrint("Recording numpad finished");
@@ -293,7 +293,7 @@
 
             string KeyText;
             string Text;
-            if (KeyboardInterop.TryParseKey(e, out Text))
+            if (NativeMethods.TryParseKey(e, out Text))
                 KeyText = Text;
             else
             {
@@ -312,7 +312,7 @@
 
         #region Debugging
         /// <summary>
-        /// Show debug traces.
+        /// Gets or sets a value indicating whether to show debug traces.
         /// </summary>
         public static bool ShowTraces { get; set; } = false;
         private bool LastKeyRepeated = false;

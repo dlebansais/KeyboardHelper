@@ -47,27 +47,27 @@
         }
 
         /// <summary>
-        /// The move direction.
+        /// Gets the move direction.
         /// </summary>
         public MoveDirections Direction { get; }
 
         /// <summary>
-        /// Alt, Shift and Ctrl key flags.
+        /// Gets the Alt, Shift and Ctrl key flags.
         /// </summary>
         public KeyFlags Flags { get; }
 
         /// <summary>
-        /// True if the alt key is pressed.
+        /// Gets a value indicating whether the alt key is pressed.
         /// </summary>
         public bool IsAlt { get { return Flags.HasFlag(KeyFlags.Alt); } }
 
         /// <summary>
-        /// True if the shift key is pressed.
+        /// Gets a value indicating whether the shift key is pressed.
         /// </summary>
         public bool IsShift { get { return Flags.HasFlag(KeyFlags.Shift); } }
 
         /// <summary>
-        /// True if the ctrl key is pressed.
+        /// Gets a value indicating whether the ctrl key is pressed.
         /// </summary>
         public bool IsCtrl { get { return Flags.HasFlag(KeyFlags.Ctrl); } }
     }

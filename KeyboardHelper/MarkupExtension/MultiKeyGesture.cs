@@ -119,7 +119,7 @@
         }
 
         /// <summary>
-        /// Key sequence text.
+        /// Gets or sets key sequence text.
         /// </summary>
         public List<string> Sequence { get; set; } = new List<string>();
     }

@@ -6,7 +6,10 @@
     using System.Text;
     using System.Windows.Input;
 
-    internal class KeyboardInterop
+    /// <summary>
+    /// Contains helper methods to acces the keyboard.
+    /// </summary>
+    internal class NativeMethods
     {
         [DllImport("user32.dll", CharSet = CharSet.Unicode, ExactSpelling = true)]
         private static extern int ToUnicodeEx(
@@ -18,15 +21,37 @@
             uint wFlags,
             IntPtr dwhkl);
 
+        /// <summary>
+        /// Gets the keyboard layout.
+        /// </summary>
+        /// <param name="threadId">The thread ID.</param>
+        /// <returns>The layout.</returns>
         [DllImport("user32.dll", ExactSpelling = true)]
         internal static extern IntPtr GetKeyboardLayout(uint threadId);
 
+        /// <summary>
+        /// Gets the keyboard state.
+        /// </summary>
+        /// <param name="keyStates">The state of keys to update.</param>
+        /// <returns>True if successful.</returns>
         [DllImport("user32.dll", ExactSpelling = true)]
         internal static extern bool GetKeyboardState(System.Windows.Forms.Keys[] keyStates);
 
+        /// <summary>
+        /// Gets the process ID of the window thread.
+        /// </summary>
+        /// <param name="hwindow">The window handle.</param>
+        /// <param name="processId">The process ID upon return.</param>
+        /// <returns>The thread ID.</returns>
         [DllImport("user32.dll", ExactSpelling = true)]
         internal static extern uint GetWindowThreadProcessId(IntPtr hwindow, out uint processId);
 
+        /// <summary>
+        /// Tries to parse a key from a keyboard event arguments.
+        /// </summary>
+        /// <param name="e">The arguments.</param>
+        /// <param name="text">The key text upon return.</param>
+        /// <returns>True if successful.</returns>
         public static bool TryParseKey(KeyEventArgs e, out string text)
         {
             int scanCode = KeyInterop.VirtualKeyFromKey(e.Key);
